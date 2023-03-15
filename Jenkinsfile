@@ -30,17 +30,17 @@ pipeline{
         }
     post{
         success{
-            mail subject: "Jenkins Job of ${JOB_NAME} of build no ${BUILD_ID} is successfull",
-                 body: "For more info click on the URL - ${BUILD_URL}",
-                 from: 'Jenkins@abhish.com',
-                 to: 'abhish9416@outlook.com'
-        }
+            mail subject: "Jenkins jobs of ${JOB_NAME} of with ${BUILD_ID} is successfull",
+                 body: "Please use this url ${BUILD_URL} for more information",
+                 to: 'abhishek16tiwary@gmail.com',
+                 from: 'jenkins@abhish.com'
+             }
         failure{
-            mail subject: "Jenkins Job of ${JOB_NAME} of build no ${BUILD_ID} is fialed",
-                 body: "For more info click on the URL - ${BUILD_URL}",
-                 from: 'Jenkins@abhish.com',
-                 to: 'abhish9416@outlook.com'
+            mail subject: "Jenkins jobs of ${JOB_NAME} of with ${BUILD_ID} is Failed",
+                 body: "Please use this url {$BUILD_URL} for more information",
+                 to: '${GIT_AUTHOR_EMAIL}',
+                 from: 'jenkins@abhish.com'
             }
-        }
+        } 
     }
 }
