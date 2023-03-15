@@ -22,7 +22,7 @@ pipeline{
         }
         stage('Docker Scan and Push'){
             steps{
-                sh 'docker scan docker scan abhish9416/spc:latest' //scanning the  vulnerabilities
+                sh 'docker scan abhish9416/spc:latest' //scanning the  vulnerabilities
                 sh 'echo build scan done'
                 sh 'docker image push abhish9416/spc:latest' // pushing the docker image to docker hub
                 sh 'echo build push done'
