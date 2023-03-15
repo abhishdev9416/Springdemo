@@ -2,18 +2,18 @@ pipeline{
     agent{label 'AGENT'}
     triggers{pollSCM('* * * * *')}
     stages{
-        stage('Version Control System'){
+        stage('VCS'){
             steps{
                 git url: 'https://github.com/abhishdev9416/Springdemo.git',
                 branch: 'develop'
             }
         }
-        stage('SonarQube analysis') {
+        stage('SonarQube analysis'){
             steps{
                 withSonarQubeEnv('Sonar_Cloud'){
                     sh ' mvn clean verify sonar:sonar -D sonar.organization=springpetclinic16 -Dsonar.projectKey=springpetclinic16'
                 } // You can override the credential to be used
-            } 
+            }
         }
         stage('Build'){
             steps{
@@ -28,19 +28,19 @@ pipeline{
                 sh 'echo build push done'
             }
         }
+    }
     post{
         success{
-            mail subject: "Jenkins jobs of ${JOB_NAME} of with ${BUILD_ID} is successfull",
-                 body: "Please use this url ${BUILD_URL} for more information",
-                 to: 'abhishek16tiwary@gmail.com',
-                 from: 'jenkins@abhish.com'
-             }
+            mail subject: "Jenkins Job of ${JOB_NAME} of build no ${BUILD_ID} is successfull",
+                 body: "For more info click on the URL - ${BUILD_URL}",
+                 from: 'Jenkins@abhish.com',
+                 to: 'abhish9416@outlook.com'
+        }
         failure{
-            mail subject: "Jenkins jobs of ${JOB_NAME} of with ${BUILD_ID} is Failed",
-                 body: "Please use this url {$BUILD_URL} for more information",
-                 to: '${GIT_AUTHOR_EMAIL}',
-                 from: 'jenkins@abhish.com'
+            mail subject: "Jenkins Job of ${JOB_NAME} of build no ${BUILD_ID} is fialed",
+                 body: "For more info click on the URL - ${BUILD_URL}",
+                 from: 'Jenkins@abhish.com',
+                 to: 'abhish9416@outlook.com'
             }
-        } 
     }
 }
