@@ -17,17 +17,18 @@ pipeline{
         }
         stage('Build'){
             steps{
-                sh 'cd /home/ubuntu/Springdemo/.devcontainer && docker image build -t abhish9416/spc:latest .'
+                sh 'cd /home/ubuntu/Springdemo/.devcontainer && docker image build -t abhish9416/spc:latest .' //building the docker image
             }
         }
-    //     stage('Post Build'){
-    //         steps{
-    //             archiveArtifacts artifacts: '**//target/spring-petclinic-3.0.0-SNAPSHOT.jar',
-    //             onlyIfSuccessful: true
-    //             junit testResults: '**/surefire-reports/TEST-*.xml'
-    //         }
-    //     }
-    // }
+        stage('Docker Scan and Push'){
+            steps{
+                sh 'docker scan docker scan abhish9416/spc:latest' //scanning the  vulnerabilities
+                sh 'echo build scan done'
+                sh 'docker image push abhish9416/spc:latest' // pushing the docker image to docker hub
+                sh 'echo build push done'
+            }
+        }
+
     // post{
     //     success{
     //         mail subject: "Jenkins Job of ${JOB_NAME} of build no ${BUILD_ID} is successfull",
