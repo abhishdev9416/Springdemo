@@ -17,7 +17,7 @@ pipeline{
         }
         stage('Build'){
             steps{
-                sh 'cd /home/ubuntu/Springdemo/.devcontainer && docker image build -t abhish9416/spc:latest .' //building the docker image
+                sh 'cd ./Springdemo/.devcontainer && docker image build -t abhish9416/spc:latest .' //building the docker image
             }
         }
         stage('Docker Scan and Push'){
