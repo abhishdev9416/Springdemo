@@ -28,7 +28,6 @@ pipeline{
                 sh 'echo build push done'
             }
         }
-
     post{
         success{
             mail subject: "Jenkins Job of ${JOB_NAME} of build no ${BUILD_ID} is successfull",
@@ -41,6 +40,7 @@ pipeline{
                  body: "For more info click on the URL - ${BUILD_URL}",
                  from: 'Jenkins@abhish.com',
                  to: 'abhish9416@outlook.com'
+            }
         }
     }
 }
