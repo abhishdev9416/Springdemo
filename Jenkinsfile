@@ -8,16 +8,16 @@ pipeline{
                 branch: 'develop'
             }
         }
-        stage('SonarQube analysis') {
-            steps{
-                withSonarQubeEnv('Sonar_Cloud'){
-                    sh ' mvn clean verify sonar:sonar -D sonar.organization=springpetclinic16 -Dsonar.projectKey=springpetclinic16'
-                } // You can override the credential to be used
-            } 
-        }
+        // stage('SonarQube analysis') {
+        //     steps{
+        //         withSonarQubeEnv('Sonar_Cloud'){
+        //             sh ' mvn clean verify sonar:sonar -D sonar.organization=springpetclinic16 -Dsonar.projectKey=springpetclinic16'
+        //         } // You can override the credential to be used
+        //     } 
+        // }
         stage('Build'){
             steps{
-                sh 'cd ./Springdemo/.devcontainer && docker image build -t abhish9416/spc:latest .' //building the docker image
+                sh 'cd ./.devcontainer && docker image build -t abhish9416/spc:latest .' //building the docker image
             }
         }
         stage('Docker Scan and Push'){
