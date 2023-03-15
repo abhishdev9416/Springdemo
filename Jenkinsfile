@@ -41,5 +41,5 @@ pipeline{
     //              from: 'Jenkins@abhish.com',
     //              to: 'abhish9416@outlook.com'
     //     }
-    // }
+    }
 }
