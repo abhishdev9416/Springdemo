@@ -31,11 +31,11 @@ spec:
   template:
     metadata:
       labels:
-        app: studentscourse
+        app: petclinic
     spec:
       containers:
-        - image: shaikkhajaibrahim/spc:latest
-          name: studentscourse
+        - image: abhish9416/spc:latest
+          name: petclinic
           env:
             - name: MYSQL_SERVER
               value: mysql-svc
