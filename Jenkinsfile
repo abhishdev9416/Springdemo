@@ -28,6 +28,14 @@ pipeline{
                 sh 'echo build push done'
             }
         }
+         stage('deploy to st') {
+            steps {
+                sh 'kubectl apply -f ./K8s/mysql-aws.yml'
+                sh 'kubectl apply -f ./K8s/Mypetclininc.yml'
+                sh 'sleep 10s'
+                sh 'kubectl get deployment'
+            }
+        }
     }
     post{
         success{
