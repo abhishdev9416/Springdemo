@@ -17,7 +17,7 @@ pipeline{
         }
         stage('Build'){
             steps{
-                sh 'cd ./.devcontainer && docker image build -t abhish9416/spc:latest .' //building the docker image
+                sh 'docker image build -t abhish9416/spc:latest .' //building the docker image
             }
         }
         stage('Docker Scan and Push'){
@@ -30,8 +30,7 @@ pipeline{
         }
          stage('deploy to st') {
             steps {
-                sh 'kubectl apply -f ./K8s/mysql-aws.yml'
-                sh 'kubectl apply -f ./K8s/Mypetclininc.yml'
+                sh 'kubectl apply -f ./K8s/deploy.yml'
                 sh 'sleep 10s'
                 sh 'kubectl get deployment'
             }
